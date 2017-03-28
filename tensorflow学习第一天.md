@@ -35,6 +35,9 @@ sess.run(hello)  #执行hello的赋值但是没有输出
 print(sess.run(hello)) #执行赋值并输出
 ```
 ```python
+print(sess.run([updata,state])) #一个run还可以对多个op进行执行，返回一个tensor
+```
+```python
 #1*2矩阵
 matrix1=tf.constant([[3.,3.]])
 
