@@ -7,6 +7,8 @@ tf.device("/gpu:0")
 ```
 ### tensorflow对象
 
+* 几乎所有tf的方法返回的都是一个op，而不是一个数值
+
 * tensorflow用tensor数据类型来表示所有的数据，相当于一个N维数组或者列表
 
 * 所有赋值都是使用一个tensorflow的对象来完成,tensorflow是一个“图”，通过向“图”中增加节点来组建整个程序
