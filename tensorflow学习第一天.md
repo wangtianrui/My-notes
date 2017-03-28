@@ -139,3 +139,19 @@ for _ in range(3):    #注意循环的使用
 sess.close()
 
 ```
+
+## 后来输入的变量用feed来填充
+
+```python
+import tensorflow as tf
+
+#使用placeholder()来创建占位符
+input1 = tf.placeholder(tf.float32)
+input2 = tf.placeholder(tf.float32)
+
+output = tf.multiply(input1, input2)
+
+with tf.Session() as sess:
+  print (sess.run([output], feed_dict={input1:[7.], input2:[2.]}))
+  #对占位符进行填充，进而实现动态数据赋值
+```
