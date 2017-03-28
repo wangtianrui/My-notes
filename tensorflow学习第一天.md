@@ -107,3 +107,32 @@ DT_QINT32	  tf.qint32	用于量化Ops的32位有符号整型.
 DT_QINT8	 tf.qint8	用于量化Ops的8位有符号整型.
 DT_QUINT8	  tf.quint8	用于量化Ops的8位无符号整型.
 ```
+## 变量（Variable）的基本用法
+
+* #### 主要用于图执行过程中的状态信息（如：计数器）
+
+```python
+import tensorflow as tf
+
+state = tf.Variable(0, name="counter") # name参数是Variable类的一个属性，在这儿可以调用state.name()得知该属性的值
+
+one = tf.constant(1)
+new_value = tf.add(state,one)
+updata = tf.assign(state,new_value) #调用assign方法将new_value的值赋给state，updata为该op的“名字”
+
+#变量必须初始化,（可以理解为分配空间，注意不是赋值）
+init_operation = tf.initialize_all_variables()
+
+sess = tf.Session()
+orignData=sess.run(init_operation)
+# print(orignData)              #输出'None'
+# print(sess.run(state))         #输出'0'
+# up_data=sess.run(updata)            #输出'1'
+# print(up_data)
+for _ in range(3):    #注意循环的使用
+    sess.run(updata)
+    print (sess.run(state))
+    
+sess.close()
+
+```
