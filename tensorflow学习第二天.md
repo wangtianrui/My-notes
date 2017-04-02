@@ -88,3 +88,40 @@ y_=tf.placeholder("float",[None,10]) # 用于输入正确值的占位符
 cross_entropy = -tf.reduce_sum(y_*tf.log(y))
 #注意，这里的交叉熵不仅仅用来衡量单一的一对预测和真实值，而是所有100幅图片的交叉熵的总和。
 ```
+### 优化/训练评估
+
+```python
+ 优化步骤
+#在这里，我们要求TensorFlow用梯度下降算法（gradient descent algorithm）以0.01的学习速率最小化交叉熵。梯度下
+# 降算法（gradient descent algorithm）是一个简单的学习过程，TensorFlow只需将每个变量一点点地往使成本不断降低
+# 的方向移动
+train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
+
+#现在，我们已经设置好了我们的模型。在运行计算之前，我们需要添加一个操作来初始化我们创建的变量
+init=tf.initialize_all_variables()
+
+
+#启动初始化操作
+sess = tf.Session()
+sess.run(init)
+
+#然后进行1000次训练
+for i in range(1000):
+    batch_xs, batch_ys = mnist.train.next_batch(100)
+    sess.run(train_step,feed_dict={x:batch_xs,y:batch_ys})     #执行train_step，并且用batch_xs,batch_ys分别填补x,y
+
+
+#评估模型
+correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
+#tf.argmax 是一个非常有用的函数，它能给出某个tensor对象在某一维上的其数据最大值所在的索引值。由于标签向量是由0,1组成，
+# 因此最大值1所在的索引位置就是类别标签，比如tf.argmax(y,1)返回的是模型对于任一输入x预测到的标签值，而 tf.argmax(y_,1)
+#  代表正确的标签，我们可以用 tf.equal 来检测我们的预测是否真实标签匹配(索引位置一样表示匹配)。
+
+
+#为了更好地检测模型的“匹配性”单纯用布尔值不够直观，所以将布尔值转换为浮点型[True, False, True, True] 会变成 [1,0,1,1] ，
+# 取平均值后得到 0.75.
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+
+print (sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
+
+```
