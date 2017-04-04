@@ -85,7 +85,7 @@ y=tf.nn.softmax(tf.matmul(x,w)+b)
 # 使用交叉熵
 
 y_=tf.placeholder("float",[None,10]) # 用于输入正确值的占位符
-cross_entropy = -tf.reduce_sum(y_*tf.log(y))
+cross_entropy = -tf.reduce_sum(y_real*tf.log(y_conv))
 #注意，这里的交叉熵不仅仅用来衡量单一的一对预测和真实值，而是所有100幅图片的交叉熵的总和。
 ```
 ### 优化/训练评估
