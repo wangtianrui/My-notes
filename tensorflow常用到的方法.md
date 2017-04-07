@@ -31,4 +31,10 @@ reduce_sum函数是求和函数(此处的reduce可以理解为压缩的意思)
 ```txt
 y_conv=tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2) #执行softmax函数将数值压缩到0-1，转换为概率
 ```
+* 常用优化方法
 
+```python
+tf.train.GradientDescentOptimizer().minimize()  # 梯度下降法
+tf.train.AdamOptimizer().minimize()  #综合梯度下降法和随机梯度下降法
+tf.train.MomentumOptimizer().minimize() #动量型梯度下降法 （ 加快优化速率 ）
+```
