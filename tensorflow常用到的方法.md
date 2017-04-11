@@ -38,3 +38,45 @@ tf.train.GradientDescentOptimizer().minimize()  # 梯度下降法
 tf.train.AdamOptimizer().minimize()  #综合梯度下降法和随机梯度下降法
 tf.train.MomentumOptimizer().minimize() #动量型梯度下降法 （ 加快优化速率 ）
 ```
+
+## 滑动平均模型
+
+* 在tensorflow中提供了tf.train.ExponentialMovingAverage来实现滑动平均模型
+
+```txt
+在初始化时需要一个参数：衰减率(decay)  //将会用于控制模型更新速度，值越大模型越趋近于稳定，一般设置为接近
+1的值如0.999
+```
+```python
+import tensorflow as tf
+
+#定义一个变量用于计算滑动平均，初始值为0，滑动平均的变量必须是实数型
+v1 = tf.Variable(0,dtype=tf.float32)
+#控制迭代轮数
+step = tf.Variable(0,trainable=False)
+
+#定义一个滑动平均的类（class），初始化衰减率为0.99
+ema = tf.train.ExponentialMovingAverage(0.99,step)
+
+maintain_averages_op = ema.apply([v1])
+
+sess = tf.InteractiveSession()
+
+init_op = tf.initialize_all_variables()
+sess.run(init_op)
+
+print(sess.run([v1,ema.average(v1)]))
+sess.run(tf.assign(v1,5))
+sess.run(maintain_averages_op)
+
+print(sess.run([v1,ema.average(v1)]))
+
+sess.run(tf.assign(step,10000))
+sess.run(tf.assign(v1,10))
+sess.run(maintain_averages_op)
+print(sess.run([v1,ema.average(v1)]))
+
+
+
+
+```
