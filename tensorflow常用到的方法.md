@@ -76,7 +76,18 @@ sess.run(tf.assign(v1,10))
 sess.run(maintain_averages_op)
 print(sess.run([v1,ema.average(v1)]))
 
+```
+* #### 分布式程序通过tf.app.run()来运行
 
+* #### flags用来存储管理多个变量
 
-
+* #### python assert断言语句的语法
+```python
+assert 1==1
+assert 2+2==2*2
+assert len(['my boy',12])<10
+assert range(4)==[0,1,2,3]
+```
+```txt
+如果断言语句中出现了flase，那么程序会报错
 ```
