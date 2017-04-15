@@ -50,18 +50,7 @@ tf.train.start_queue_runners 该方法会开启输入数据的通道线程
 tf.QueueRunner。从设计上这两个类必须被一起使用。Coordinator类可以用来同时停止多个工作线程并且向那个在等待所有
 工作线程终止的程序报告异常。QueueRunner类用来协调多个工作线程同时将多个tensor压入同一个队列中
 ```
+## protobuf
 
-* #### 分布式程序通过tf.app.run()来运行
+* 其实和XML 差不多，也就是把某种数据结构的信息，以某种格式保存起来。主要用于数据存储、传输协议格式等场合。
 
-* #### flags用来存储管理多个变量
-
-* #### python assert断言语句的语法
-```python
-assert 1==1
-assert 2+2==2*2
-assert len(['my boy',12])<10
-assert range(4)==[0,1,2,3]
-```
-```txt
-如果断言语句中出现了flase，那么程序会报错
-```
