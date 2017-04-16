@@ -122,3 +122,14 @@ tf.transpose(b, perm=[0, 2, 1]) ==> [[[1  4]
                                       [8 11]
                                       [9 12]]]
 ```
+* ### os.path.join()
+
+```txt
+是在拼接路径的时候用的。举个例子，
+os.path.join(“home”, "me", "mywork")
+在Linux系统上会返回
+“home/me/mywork"
+在Windows系统上会返回
+"home\me\mywork"
+好处是可以根据系统自动选择正确的路径分隔符"/"或"\"
+```
