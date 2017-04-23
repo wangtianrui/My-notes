@@ -13,7 +13,24 @@
 </android.support.v7.widget.RecyclerView>
 ```
 
+* 新建一个ViewHolder类，用来管理每个item的布局（在后面Adapter中也会用到）,主要是修改它的构造方法和内部变量,以便后面绑定数据
+```java
+public class CrimeHolder extends RecyclerView.ViewHolder {
+       private TextView mTitleTextView;
+       private TextView mDateTextView;
+       private CheckBox mSolvedCheckBox;
+
+       public CrimeHolder(View itemView) {
+           super(itemView);
+           mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
+           mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
+           mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
+       }
+   }
+```
+
 * #### 新建一个Adapter类，继承自RecyclerView.Adapter<一个ViewHolder对象>
+
 
 * 类中有三个抽象方法需要实现
 
