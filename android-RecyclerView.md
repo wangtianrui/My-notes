@@ -19,12 +19,21 @@ public class CrimeHolder extends RecyclerView.ViewHolder {
        private TextView mTitleTextView;
        private TextView mDateTextView;
        private CheckBox mSolvedCheckBox;
+       private Crime mCrime;
 
        public CrimeHolder(View itemView) {
            super(itemView);
            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_crime_title_text_view);
            mDateTextView = (TextView) itemView.findViewById(R.id.list_item_crime_date_text_view);
            mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
+       }
+
+       //注意这样可以加快速度，并且保持代码封装性
+       public void bindCrime(Crime crime){
+           mCrime = crime ;
+           mTitleTextView.setText(mCrime.getTitle());
+           mDateTextView.setText(mCrime.getDate()+"");
+           mSolvedCheckBox.setChecked(mCrime.isSolved());
        }
    }
 ```
@@ -77,7 +86,7 @@ private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
             Crime crime = mCrimes.get(position);
-            holder.mTitleTextView.setText(crime.getTitle());
+             holder.bindCrime(crime);//这里直接调用holder中实现的方法，省时、简单
         }
 
         @Override
