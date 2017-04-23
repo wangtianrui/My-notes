@@ -2,7 +2,7 @@
 
 * #### 首先是添加依赖
 
-* #### 然后在布局文件中创建出RecyclerView的布局
+* #### 然后在布局文件中创建出只有一个RecyclerView的fragment布局，用于给fragment设置布局（不是item的布局！）
 ```xmlns
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.RecyclerView
