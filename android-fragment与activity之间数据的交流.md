@@ -1,7 +1,7 @@
 ### Fragment的复用性 
 
 ```txt
-因为fragment是一个写好的“界面”，然后Fragment是放在Activity容器里面的一个东西，所以所谓的Fragment的复用性就是可以在不同的Activity中使用相同的fragment。
+因为fragment是一个写好的“界面”，然后Fragment是放在Activity容器里面的一个东西，所以所谓的Fragment的复用性就是可以在不同的Activity中使用相同的fragment。换句话来说就是Fragment类中不能有具体的数据值，所有的值都直接或者间接从其他地方获得，类似于一个空的躯壳
 ```
 
 ### fragment中argument的使用与intent使用的区别
