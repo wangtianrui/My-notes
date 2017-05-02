@@ -40,3 +40,14 @@ dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);//REQUEST_DATE是用�
 ```
 startActivityForResult是打开一个activity，以当前Activity为Result（也就是新Activity销毁后的跳转目标）
 onActivityResult是Activity销毁后目标Activity会自动调用的方法，数据传送逻辑处理的地方
+
+### Fragment之间的跳转
+```java
+public void onClick(View v){
+       Fragment fragment = CrimeFragment.newInstance(mCrime.getId());
+       FragmentManager fm = getActivity().getSupportFragment();
+       fm.beginTransaction()
+          .add(R.id.detail_fragment_container,fragment)
+          .commit();
+}
+```
