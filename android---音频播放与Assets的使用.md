@@ -108,31 +108,20 @@ private SoundPool mSoundPool = buildSoundPool();
 * #### 播放音频
 
 ```java
-public void play(Sound sound) {
-        Integer soundId = sound.getSoundId();
-        if (soundId == null) {
-            return;
-        }
-        mSoundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f);
-    }
-    
 @Override
        public void onClick(View v) {
            mBeatBox.play(mSound);    //mBeatBox是一“整体对象”
        }
 ```
-
-* #### 释放音频
+* #### 如何防止旋转屏幕中断声音
 
 ```java
-public void release(){
-        mSoundPool.release();
-    }
-    
+//在fragment类中的oncreate方法中
 @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mBeatBox.release();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);   //将该数值设置为true，即可
+
+        mBeatBox = new BeatBox(getActivity());
     }
- ```
-    
+```
