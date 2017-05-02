@@ -108,8 +108,31 @@ private SoundPool mSoundPool = buildSoundPool();
 * #### 播放音频
 
 ```java
+public void play(Sound sound) {
+        Integer soundId = sound.getSoundId();
+        if (soundId == null) {
+            return;
+        }
+        mSoundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f);
+    }
+    
 @Override
        public void onClick(View v) {
            mBeatBox.play(mSound);    //mBeatBox是一“整体对象”
        }
 ```
+
+* #### 释放音频
+
+```java
+public void release(){
+        mSoundPool.release();
+    }
+    
+@Override
+    public void onDestroy() {
+        super.onDestroy();
+        mBeatBox.release();
+    }
+ ```
+    
