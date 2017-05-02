@@ -109,27 +109,25 @@ public interface Callbacks {
 * ④如果在平板上，如何实现数据同时刷新？（右边改左边也改)
 
   ①在右边的Fragment类中添加接口和对象
-  ```java
-  private Callbacks mCallbacks;
+   ```java
+   private Callbacks mCallbacks;
       
-  public interface Callbacks{
-      void onCrimeUpdated(Crime crime);
-    }
-    ```
+   public interface Callbacks{
+       void onCrimeUpdated(Crime crime);
+     }
+     ```
     ②在activity中实现接口与方法(注意：所有托管该Fragment的activity都必须实现接口，如果方法已经实现了，那么就实现一个空方法就行)
-    ```java
-    @Override
-       public void onCrimeUpdated(Crime crime) {
-           CrimeListFragment listFragment = (CrimeListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-           listFragment.updateUI();
-       }
-
-    ```
+     ```java
+     @Override
+        public void onCrimeUpdated(Crime crime) {
+            CrimeListFragment listFragment = (CrimeListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            listFragment.updateUI();
+        }
+     ```
     ③ 最后调用更新数据的方法
     ```java
     private void updateCrime() {
             CrimeLab.get(getActivity()).updateCrime(mCrime);
             mCallbacks.onCrimeUpdated(mCrime);
         }
-
     ```
