@@ -124,7 +124,7 @@
   ```
   ④通过上述得到的jsonBody集合得到一个目标数据的集合（注意上面是对象的集合，比如一个照片他有图片和名字还有大小等信息，此处获得的是对象集合的每个对象的信息的集合）
   ```java
-  JSONObject photosJsonObject = jsonBody.getJSONObject("photo");//得到photo信息集合
+  JSONObject photosJsonObject = jsonBody.getJSONObject("photos");//得到photo信息集合
   ```
   ⑤再由photo信息集合得到一个数组，并通过数组获得一个目标对象的信息
   ```java
@@ -150,7 +150,7 @@
   private void parseItems(List<GalleryItem> items, JSONObject jsonBody) throws IOException, JSONException {
 
         //jsonBody是一个JSONObject对象的集合
-        JSONObject photosJsonObject = jsonBody.getJSONObject("photo");
+        JSONObject photosJsonObject = jsonBody.getJSONObject("photos");
         //由集合得到一个数组
         JSONArray photoJsonArray = photosJsonObject.getJSONArray("photo");
         for (int i = 0; i < photoJsonArray.length(); i++) {
