@@ -68,7 +68,7 @@
   ```java
   String url = Uri.parse("http://api.flickr.com/services/rest/")
                       .buildUpon()
-                      .appendQueryParameter("method", "flickr.photo.getRecent")
+                      .appendQueryParameter("method", "flickr.photos.getRecent")
                       .appendQueryParameter("api_key", API_KEY)
                       .appendQueryParameter("format", "json")
                       .appendQueryParameter("nojsoncallback", "1")
