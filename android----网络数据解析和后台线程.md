@@ -175,14 +175,17 @@
 private class FetchItemsTask extends AsyncTask<Void, Void, List<GalleryItem>> {
 
       //每次就调用这两个方法
-      @Override
+      
+      //后台加载数据
+      @Override
       protected List<GalleryItem> doInBackground(Void... params) {
 //            new FlickrFetchr().fetchItems();  //获得List ，用来加载recyclerView ， 不必在意
 //            return new FlickrFetchr().fetchItems();
           return null ;
       }
       
-      @Override
+      //主线程中更新UI , 如果在后台更新ui容易冲突
+      @Override
        protected void onPostExecute(List<GalleryItem> galleryItems) {
            mItems = galleryItems;
            setupAdapter();
