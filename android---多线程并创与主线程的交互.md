@@ -158,7 +158,7 @@ Handler mResponseHandler = new Handler();
                target.bindGalleryItem(drawable);
            }
        });
-       ```
+```
 ⑧发布Message给主线程
 
 ```java
