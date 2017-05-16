@@ -127,7 +127,9 @@
   ```java
   JSONObject photosJsonObject = jsonBody.getJSONObject("photos");//得到photo信息集合
   ```
+  
   ⑤再由photo信息集合得到一个数组，并通过数组获得一个目标对象的信息
+  
   ```java
   JSONArray photoJsonArray = photosJsonObject.getJSONArray("photo");
 
