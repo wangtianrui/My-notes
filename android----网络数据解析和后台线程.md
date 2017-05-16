@@ -119,10 +119,11 @@
   ③首先是得到JSONObject类对象
   
   个人理解该对象有多种内容形式--下面会逐一遇到
+  
   ```java
   JSONObject jsonBody = new JSONObject(jsonString);  //首先是一个从解析后的url数据得到的一个“广泛”的对象的集合（不止包涵图片）
-  ```
-  ④通过上述得到的jsonBody集合得到一个目标数据的集合（注意上面是对象的集合，比如一个照片他有图片和名字还有大小等信息，此处获得的是对象集合的每个对象的信息的集合）
+  ```
+  ④通过上述得到的jsonBody集合得到一个目标数据的集合（注意上面是对象的集合，比如一个照片他有图片和名字还有大小等信息，此处获得的是对象集合的每个对象的   信息的集合）
   ```java
   JSONObject photosJsonObject = jsonBody.getJSONObject("photos");//得到photo信息集合
   ```
