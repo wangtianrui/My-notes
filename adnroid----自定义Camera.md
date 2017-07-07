@@ -246,8 +246,79 @@ public static void setCameraDisplayOrientation(Activity activity, int cameraId, 
         }
         setCameraDisplayOrientation(this, mCameraId, mCamera);
 
-
     }
 ```
+③修改图片保存方向
+```java
+public static Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
+        Bitmap returnBm = null;
 
+        //Matrix图片动作（旋转平移）
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+
+        try {
+            returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+        } catch (OutOfMemoryError e) {
+
+        }
+        if (returnBm == null) {
+            returnBm = bm;
+        }
+        if (bm != returnBm) {
+            bm.recycle();
+        }
+        return returnBm;
+    }
+```
+④将保存图片的操作（与修改图片方向的操作）放到线程中处理，重写上面的回调
+```java
+//开辟线程来处理图片
+            final File pictureDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            final String pictureName = new SimpleDateFormat().format(new Date(System.currentTimeMillis()))
+                    .toString() + ".png";
+            final String picturePath = pictureDir + File.separator + pictureName;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    File file = new File(picturePath);
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                        bitmap = rotateBitmapByDegree(bitmap, 90);
+                        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+                        bos.flush();
+                        bos.close();
+                        bitmap.recycle();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+            mCamera.startPreview();
+        }
+    };
+
+```
+⑤调整焦距
+```java
+mTakePictureBtn = (ImageView) findViewById(R.id.btn_capture);
+mTakePictureBtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        mCamera.autoFocus(mAutoFocusCallback);
+    }
+});
+
+// 聚焦回调
+private AutoFocusCallback mAutoFocusCallback = new AutoFocusCallback() {
+    @Override
+    public void onAutoFocus(boolean success, Camera camera) {
+        if (success) {
+            mCamera.takePicture(null, null, mPictureCallback);
+        }
+    }
+};
+```
 
