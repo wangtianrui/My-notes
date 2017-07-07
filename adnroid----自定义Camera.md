@@ -179,4 +179,75 @@
         }
     });
   ```
-#### 二、调整画面
+#### 二、调整画面并更改照下来的图片的样子
+
+①设置相机竖屏
+
+```java
+public static void setCameraDisplayOrientation(Activity activity, int cameraId, Camera camera) {
+
+        int degrees = 0;
+
+        //可以获得摄像头信息
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        Camera.getCameraInfo(cameraId, info);
+
+        //获取屏幕旋转方向
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                degrees = 0;
+                break;
+            case Surface.ROTATION_90:
+                degrees = 90;
+                break;
+            case Surface.ROTATION_180:
+                degrees = 180;
+                break;
+            case Surface.ROTATION_270:
+                degrees = 270;
+                break;
+        }
+        int result;
+        if (info.facing == CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;
+        } else {
+            result = (info.orientation - degrees + 360) % 360;
+        }
+        camera.setDisplayOrientation(result);
+    }
+```
+②在oncrete方法中调用
+```java
+@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //设置无标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //设置全屏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //注意：上面两个设置必须写在setContentView前面
+        setContentView(R.layout.activity_main3);
+        if (!checkCameraHardware(this)) {
+            Toast.makeText(Main3Activity.this, "相机不支持", Toast.LENGTH_SHORT).show();
+        } else {
+            openCamera();
+            mTakePictureButton = (Button) findViewById(R.id.button_capture);
+            mTakePictureButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCamera.takePicture(null, null, mPictureCallback);
+                }
+            });
+        }
+        setCameraDisplayOrientation(this, mCameraId, mCamera);
+
+
+    }
+```
+
+
