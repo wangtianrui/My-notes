@@ -75,10 +75,15 @@ sourceSets {
         }
     }
 ```
-⑥在gradle.properties中添加下面一行
+⑥在defaultConfig节点下添加
 ```xmln
-android.useDeprecatedNdk=true
-```
+defaultConfig {
+
+        ndk {
+            abiFilters "armeabi"
+        }
+    }
+ ```
 ⑦在gradle.properties中添加下面一行
 ```xmln
 android.useDeprecatedNdk=true
