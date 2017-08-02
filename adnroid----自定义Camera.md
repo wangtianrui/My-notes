@@ -2,8 +2,8 @@
 
 #### 一、首先是简单的相机调用（画面未调整）
 
-  ①权限
-  ```xml
+  ①权限相关
+  ```xml
   <?xml version="1.0" encoding="utf-8"?>
   <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.xm.camerasimple"
