@@ -41,7 +41,7 @@ compile 'com.android.support:design:25.3.1'
 ```
 
 ##### 相应的点击事件的处理
-activity中
+在activity中
 
 ```java
 @Override
