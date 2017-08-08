@@ -1,6 +1,6 @@
 ### BottomNavigationView
 
-##### 首先是在build里面添加依赖
+##### 首先是在build里面添加依赖1
 ```java
 compile 'com.android.support:design:25.3.1'
 ```
