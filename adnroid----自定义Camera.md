@@ -5,20 +5,20 @@
   ①权限相关
 
   ```xml
+
   <?xml version="1.0" encoding="utf-8"?>
   <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.xm.camerasimple"
     android:versionCode="1"
     android:versionName="1.0" >
-
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-  
-
   </manifest>
+
   ```
+  
   ②检测是否有相机与获取相机的方法
   ```java
   // 判断相机是否支持
