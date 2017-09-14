@@ -4,8 +4,7 @@
 
   ①权限相关
 
-  ```xml
-
+ ```xml
   <?xml version="1.0" encoding="utf-8"?>
   <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.xm.camerasimple"
@@ -17,10 +16,10 @@
 
   </manifest>
 
-  ```
+```
   
   ②检测是否有相机与获取相机的方法
-  ```java
+```java
   // 判断相机是否支持
     private boolean checkCameraHardware(Context context) {
         if (context.getPackageManager().hasSystemFeature(
@@ -41,7 +40,7 @@
         }
         return c;
     }
-  ```
+```
   ③创建prieview----相机拍摄的画面
   ```java
   public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
