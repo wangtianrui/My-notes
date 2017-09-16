@@ -1,6 +1,6 @@
 ### 如果没有“主题框”
 
-* 检查style里面的类和fragment继承的类是不是一致的
+* 检查style里面的类和fragment继承的类是不是一致的。
 
 
 ### 数据库(schema)
