@@ -68,7 +68,7 @@
 >git branch 查看当前分支
 ![alt text](https://www.liaoxuefeng.com/files/attachments/0013849088235627813efe7649b4f008900e5365bb72323000/0)
 >
-![alt text](https://www.liaoxuefeng.com/files/attachments/00138490883510324231a837e5d4aee844d3e4692ba50f5000/0)
+>![alt text](https://www.liaoxuefeng.com/files/attachments/00138490883510324231a837e5d4aee844d3e4692ba50f5000/0)
 
 >git merge dev 合并分支（切换回主支再用）
 
