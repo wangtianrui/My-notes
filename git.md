@@ -55,13 +55,13 @@
 
 >只有主支
 >
-![alt text](https://www.liaoxuefeng.com/files/attachments/0013849087937492135fbf4bbd24dfcbc18349a8a59d36d000/0)
+>![alt text](https://www.liaoxuefeng.com/files/attachments/0013849087937492135fbf4bbd24dfcbc18349a8a59d36d000/0)
 
 
 >添加分支 
 
 >git checkout -b dev   添加分支并切换过去此命令等价于 git branch dev然后git checkout dev
-![alt text](https://www.liaoxuefeng.com/files/attachments/001384908811773187a597e2d844eefb11f5cf5d56135ca000/0)
+>![alt text](https://www.liaoxuefeng.com/files/attachments/001384908811773187a597e2d844eefb11f5cf5d56135ca000/0)
 
 
 >分支与主支的指针是互不影响的
