@@ -1,4 +1,4 @@
-#### python字符串
+#### 字符串
 
 ```python
 print("Hello World")
@@ -54,3 +54,80 @@ message = message + str(number)
 print(message)
 ```
 >    python    23
+
+#### 列表
+```python
+bicycles = ['trek','cannondale','redline','specialized']
+print(bicycles)
+print(bicycles[0])
+print(bicycles[-1]) #返回最后一个
+print(bicycles[-2])#返回倒数第二个
+print(bicycles[-3])#返回倒数第三个
+```
+>['trek', 'cannondale', 'redline', 'specialized']
+
+>trek
+
+>specialized
+
+>redline
+
+>cannondale
+
+```python
+bicycles.append('Giant') #在尾部加一个,动态改变列表
+print(bicycles)
+```
+>['trek', 'cannondale', 'redline', 'specialized', 'Giant']
+
+```python
+'''
+*****************动态改变列表*****************
+'''
+print("Original:",bicycles)
+
+bicycles.append('Giant') #在尾部加一个
+print("append:",bicycles)
+
+bicycles.insert(2,'Fenghuang') #在位置2处增加一个元素
+print("insert:",bicycles)
+
+del bicycles[1]  #删除位置1的元素
+print("del:",bicycles)
+
+the_last_element = bicycles.pop() #弹出最后一个元素（删除后返回该元素）,“栈抛出”
+print("pop:",the_last_element)
+print("after pop:",bicycles)
+
+poped_element = bicycles.pop(2) #弹出任意位子元素
+print("pop2:",poped_element)
+print("after pop2:",bicycles)
+
+bicycles.remove('Fenghuang') #删除第一个出现的该变量，无返回值
+print("remove:",bicycles)
+deleted_element = 'specialized'
+bicycles.remove(deleted_element)
+print("remove:",bicycles)
+print("I deleted " + deleted_element) #注意思想，这样可以暂时保存删除的变量
+```
+
+>Original: ['trek', 'cannondale', 'redline', 'specialized']
+
+>append: ['trek', 'cannondale', 'redline', 'specialized', 'Giant']
+
+>insert: ['trek', 'cannondale', 'Fenghuang', 'redline', 'specialized', 'Giant']
+>del: ['trek', 'Fenghuang', 'redline', 'specialized', 'Giant']
+
+>pop: Giant
+
+>after pop: ['trek', 'Fenghuang', 'redline', 'specialized']
+
+>pop2: redline
+
+>after pop2: ['trek', 'Fenghuang', 'specialized']
+
+>remove: ['trek', 'specialized']
+
+>remove: ['trek']
+
+>I deleted specialized
