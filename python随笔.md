@@ -131,3 +131,45 @@ print("I deleted " + deleted_element) #注意思想，这样可以暂时保存�
 >remove: ['trek']
 
 >I deleted specialized
+
+```python
+'''
+***************列表的顺序操作***************
+'''
+cars = ["bmw","audi","benz","toyota","Subaru"]
+print("original:",cars)
+
+cars.sort() #排序，并且无法变回以前的顺序
+print("sort:",cars)
+
+cars.sort(reverse=True) #倒序
+print("reverse sort:",cars)
+
+cars = ["bmw","audi","benz","toyota","Subaru"]
+print("original:",cars)
+cars_sort= sorted(cars) #此方法是将参数列表排序后返回给新的变量，原列表不变
+print("after sorted the original:",cars,"\nthe return by sorted():",cars_sort)
+
+print("original:",cars)
+cars.reverse() #倒序，但是不会排序！
+print("reverse:",cars)
+
+print("len:",len(cars)) #得到列表长度
+```
+>original: ['bmw', 'audi', 'benz', 'toyota', 'Subaru']
+
+>sort: ['Subaru', 'audi', 'benz', 'bmw', 'toyota']
+
+>reverse sort: ['toyota', 'bmw', 'benz', 'audi', 'Subaru']
+
+>original: ['bmw', 'audi', 'benz', 'toyota', 'Subaru']
+
+>after sorted the original: ['bmw', 'audi', 'benz', 'toyota', 'Subaru']
+
+>the return by sorted(): ['Subaru', 'audi', 'benz', 'bmw', 'toyota']
+
+>original: ['bmw', 'audi', 'benz', 'toyota', 'Subaru']
+
+>reverse: ['Subaru', 'toyota', 'benz', 'audi', 'bmw']
+
+>len: 5
