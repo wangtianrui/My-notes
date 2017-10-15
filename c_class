@@ -1,0 +1,166 @@
+#### 1字符串首字母大写
+```c
+#include<stdio.h>
+
+int main()
+{
+	char string[50];
+	char * str;
+	int i  ;
+	gets(string);
+	printf("输入的是：");
+	for(i = 0 ; i < strlen(string) ; i ++)
+	{
+		printf("%c",string[i]);
+	}
+	printf("\n");
+
+	for(i = 0 ; i < strlen(string) ; i++ )
+	{
+		if(i == 0)
+		{
+			string[i] = string[i] - 32 ;
+		}
+		if(string[i] == ' ')
+		{
+			string[i+1] = string[i+1] - 32 ;
+			printf("c");
+		}
+	}
+	printf("输出是：") ;
+	for(i = 0 ; i < strlen(string) ; i ++)
+	{
+		printf("%c",string[i]);
+	}
+
+	return 0 ;
+}
+```
+
+#### 2斐波那契
+```c
+/*斐波那契数*/
+#include<stdio.h>
+
+int fibonacci(int n)
+{
+	if(n == 1 || n == 2)
+	{
+		return 1;
+	}
+	else
+	{
+		return fibonacci(n - 1) + fibonacci(n - 2);
+	}
+}
+
+int main()
+{
+	int n, i;
+	int f[100];
+	f[0] = 1;
+	f[1] = 1;
+	for(i = 2; i < 20; i++)
+	{
+		f[i] = f[i - 1] + f[i - 2];
+	}
+	for(i = 0; i < 20; i++)
+	{
+		printf("%d ", f[i]);
+	}
+	printf("\n");
+	scanf("%d", &n);
+	printf("用递归获取第%d个斐波那契数：%d\n", n, fibonacci(n));
+	return 0;
+}
+```
+
+#### 3输出边长为n的菱形
+```c
+int main()
+{
+	int n, i, j;
+	while(scanf("%d", &n) == 1)
+	{
+		n = n - 1 ;
+		for(i = 0; i < n; i++)
+		{
+			for(j = 0; j < 2 * n; j++)
+			{
+				if(j >= n - i && j <= n + i)
+					printf("*");
+				else
+					printf(" ");
+			}
+			printf("\n");
+		}
+		for(i = n; i >= 0; i--)
+		{
+			for(j = 0; j <= 2 * n; j++)
+			{
+				if(j >= n - i && j <= n + i)
+					printf("*");
+				else
+					printf(" ");
+			}
+			printf("\n");
+		}
+}
+	return 0;
+
+}
+```
+
+#### 4矩阵对角线求和
+
+```c
+#include<stdio.h>
+
+int main()
+{
+	int len ;
+	int num[20][20];
+	int i , j , sum = 0;
+	printf("输入数组边长:\n");
+	scanf("%d",&len);
+	for(i = 0 ; i < len ; i++)
+	{
+		for(j = 0 ; j < len ; j++)
+		{
+			num[i][j] = i * j + i + j + 1 ; //赋值随便写的
+		}
+	}
+
+	for(i = 0 ; i < len ; i++)
+	{
+		for(j = 0 ; j < len ; j++)
+		{
+			if(i == j)
+			{
+				sum = sum + num[i][j];
+			}
+			if(len - i == j + 1)
+			{
+				sum = sum + num[i][j];
+			}
+		}
+	}
+	if(len % 2 == 1)
+	{
+		sum = sum - num[len/2][len/2];
+	}
+	for(i = 0 ; i < len ; i++)
+	{
+		for(j = 0 ; j < len ; j++)
+		{
+			printf("%3d",num[i][j]);  //%nd可规定输出的所占的空间为n
+		}
+
+		printf("\n");
+	}
+	printf("%d",sum);
+	return 0 ;
+}
+```
+
+#### 5矩阵乘法
