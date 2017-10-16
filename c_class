@@ -210,7 +210,50 @@ void main()
 		x1 = ( x2 + 1 ) * 2; //第一天的桃子数是第2天桃子数加1后的2倍
 		x2 = x1;
 		day--;
-	} 
+	}
 	printf("the total is %d\n",x1);
+}
+```
+
+#### 非0数前移(优化后的方法,执行循环次数减少)
+
+```c
+#include<stdio.h>
+int main()
+{
+	int num[50];
+	int size , i , j;
+	printf("输入数组大小：\n");
+	scanf("%d", &size);
+	printf("请输入%d个数：",size);
+	for(i = 0 ; i < size ; i ++)
+	{
+		scanf("%d",&num[i]);
+	}
+	for(i = 0 , j = size - 1 ; i < j ;)
+	{
+		if(num[i]==0 && num[j]!= 0)
+		{
+			num[i] = num[j];
+			num[j] = 0;
+			i ++ ;
+			j -- ;
+		}
+		if(num[i] != 0)
+		{
+			i++ ;
+		}
+		if(num[i] == 0 && num[j] == 0)
+		{
+			j -- ;
+		}
+
+	}
+	for(i = 0 ; i < size ; i ++)
+	{
+		printf("%4d ",num[i]);
+	}
+
+	return 0;
 }
 ```
