@@ -39,9 +39,8 @@ int main()
 
 #### 斐波那契
 ```c
-/*斐波那契数*/
 #include<stdio.h>
-
+//该方法可以输出指定位子的斐波那契数
 int fibonacci(int n)
 {
 	if(n == 1 || n == 2)
@@ -54,6 +53,7 @@ int fibonacci(int n)
 	}
 }
 
+#include<stdio.h>
 int main()
 {
 	int n, i;
@@ -66,11 +66,12 @@ int main()
 	}
 	for(i = 0; i < 20; i++)
 	{
-		printf("%d ", f[i]);
+		if(f[i]<=100)
+		{
+			printf("%d ", f[i]);
+		}
 	}
 	printf("\n");
-	scanf("%d", &n);
-	printf("用递归获取第%d个斐波那契数：%d\n", n, fibonacci(n));
 	return 0;
 }
 ```
@@ -182,7 +183,7 @@ int main()
     int temp;
     for(i = 0; i < 2; i++){
         for(j = 0; j < 2; j++){
-            temp = 0;  
+            temp = 0;
             for(k = 0; k < 5; k++){
                 temp = temp + a[i][k] * b[k][j];
             }
@@ -192,5 +193,24 @@ int main()
         printf("\n");
     }
 	return 0 ;
+}
+```
+
+#### 猴子吃桃
+
+```c
+#include<stdio.h>
+void main()
+{
+	int day , x1 , x2 ;
+	day = 9;
+	x2 = 1;
+	while( day > 0 )
+	{
+		x1 = ( x2 + 1 ) * 2; //第一天的桃子数是第2天桃子数加1后的2倍
+		x2 = x1;
+		day--;
+	} 
+	printf("the total is %d\n",x1);
 }
 ```
