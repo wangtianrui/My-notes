@@ -257,3 +257,46 @@ int main()
 	return 0;
 }
 ```
+
+#### 杨辉三角
+```c
+#include<stdio.h>
+int main()
+{
+	int yh[100][100];
+	int i, j, index;
+	while(scanf("%d", &index) != EOF)
+	{
+		for(i = 0; i < index; i++)
+		{
+			yh[i][0] = 1;
+			yh[i][i] = 1;
+		}
+		for(i = 0; i < index; i++)
+		{
+			for(j = 0; j < index - i; j++)
+			{
+				printf(" ");
+			}
+			for(j = 0; j <= i; j++)
+			{
+				if(i == j)
+				{
+					printf("%2d ", yh[i][i]);
+				}
+				else if(j == 0)
+				{
+					printf("%2d ", yh[i][j]);
+				}
+				else
+				{
+					yh[i][j] = yh[i - 1][j - 1] + yh[i - 1][j];		/*o?D?*/
+					printf("%2d ", yh[i][j]);
+				}
+			}
+			printf("\n");
+		}
+	}
+	return 0;
+}
+```
