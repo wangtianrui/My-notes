@@ -300,6 +300,93 @@ int main()
 	return 0;
 }
 ```
+#### 开辟三维数组
+```c
+#include<stdio.h>
+int *** create(int lenth , int wide , int high)
+{
+    int i , j ;
+    int *** p = ( int *** )malloc( high * sizeof(int**) );
+	for( i = 0 ; i < high ; i ++)
+	{
+		p[i] = (int **)malloc( wide * sizeof(int*) ) ;
+	}
+	for( i = 0 ; i < high ; i ++)
+   	{
+   		for( j = 0 ; j < wide ; j ++)
+     	{
+            p[i][j] = (int *)malloc( lenth * sizeof(int) ) ;
+		}
+	}
+	return p ;
+}
+
+int *** initData(int *** p ,int high ,int wide ,int lenth)
+{
+    int i , j , l ;
+	for(i = 0 ; i < high ; i ++)
+    {
+        for(j = 0 ; j < wide ; j ++)
+        {
+            for( l = 0 ; l < lenth ; l ++ )
+            {
+                p[i][j][l] = i + j + l ;
+            }
+        }
+    }
+    return p ;
+}
+
+void show(int *** p ,int high ,int wide ,int lenth)
+{
+    int i , j , l ;
+    for(i = 0 ; i < high ; i ++)
+    {
+        for(j = 0 ; j < wide ; j ++)
+        {
+            for( l = 0 ; l < lenth ; l ++ )
+            {
+                printf("%3d", p[i][j][l]);
+            }
+            printf("\n");
+        }
+         printf("\n");
+    }
+}
+
+void deleteArray(int *** p ,int high ,int wide ,int lenth)
+{
+    int i , j ;
+    for( i = 0 ; i < high ; i ++)
+    {
+       for( j = 0 ; j < wide ; j ++)
+        {
+            free(p[i][j]);
+        }
+    }
+    for( i = 0 ; i < high ; i ++)
+    {
+        free(p[i]);
+        free(p);
+    }
+}
+int main()
+{
+	int i , j , l;
+	int lenth , wide , high ;
+	int *** p ;
+	printf("输入长、宽、高:\n");
+	scanf("%d%d%d",&lenth,&wide,&high);
+	p = create(lenth,wide,high);
+	p = initData(p,high,wide,lenth);
+	show(p,high,wide,lenth);
+	deleteArray(p,high,wide,lenth);
+	//printf("%d",p[1][1][1]);
+	return 0;
+}
+
+```
+
 #### 链表倒序
 ```c
 #include<stdio.h>
