@@ -646,3 +646,126 @@ int main()
 }
 
 ```
+
+#### 快排
+
+```c
+int * quickSort(int *a , int head , int foot)
+{
+	if(head < foot)
+	{
+
+		int i , j  , n;
+		i = head ;
+		j = foot ;
+		int temp ;
+		int a0 = a[head];
+		printf("test:");
+		printf("head=%d,",head);
+		printf("foot=%d\n",foot);
+
+		while( i < j )
+		{
+			for(n = 0 ; n < 8 ; n ++)
+			{
+				printf("%3d",a[n]);
+			}
+			printf("\n");
+
+			if(a0 < a[i])
+			{
+				//printf("%d<%d\n",a0,a[i]);
+				a[j] = a[i] ;
+				a[i] = a0 ;
+				j --;
+
+			}
+			else if(a0 > a[j])
+			{
+				//printf("%d>%d\n",a0,a[j]);
+				a[i] = a[j] ;
+				a[j] = a0 ;
+
+				i ++;
+
+			}
+			else if(a0 < a[j]&& a0 != a[j])
+			{
+				j -- ;
+			}
+			else if(a0 > a[i] && a0 != a[i])
+			{
+				i ++ ;
+			}
+			else
+			{
+				//printf("都没有\n");
+			}
+			//printf("i=%d,j=%d\n",i,j);
+		}
+
+			a[i] = a0 ;
+			printf("递归前:");
+			printf("i=%d,",i);
+			printf("j=%d\n",j);
+			quickSort(a,head,i-1);
+
+
+			quickSort(a,i+1,foot);
+
+
+			return a ;
+		}
+}
+
+
+int * bookSort(int * a , int head , int foot)
+{
+	int i , j , temp;
+	printf("test:",a[i]);
+	printf("head=%d,",head);
+	printf("foot=%d\n",foot);
+	for(i = 0 ; i < 8 ; i ++)
+	{
+		printf("%3d",a[i]);
+	}
+	printf("\n",a[i]);
+	if(head < foot)
+	{
+		i = head ;
+		j = foot ;
+		temp = a[head];
+		do
+		{
+			while(a[j]>temp)
+			{
+				j--;
+			}
+			if(i<j)
+			{
+				a[i]=a[j] ;
+				a[j]=temp ;
+				i++ ;
+			}
+			while(a[i]<temp)
+			{
+				i++;
+			}
+			if(i<j)
+			{
+				a[j] = a[i] ;
+				a[i] = temp ;
+				j--;
+			}
+		}while(i!=j);
+		a[j] = temp ;
+		printf("递归前:");
+		printf("i=%d,",i);
+		printf("j=%d\n",j);
+		bookSort(a,head,i-1);
+		bookSort(a,i+1,foot);
+	}
+	return a ;
+ }
+
+ ```
