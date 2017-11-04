@@ -387,85 +387,7 @@ int main()
 
 ```
 
-#### 链表倒序
-```c
-#include<stdio.h>
 
-typedef struct listTest
-{
-    int num ;
-    struct listTest *next ;
-}mList;
-
-mList * init()
-{
-    int i ;
-    mList *head , *p , *temp;
-    temp = (mList *)malloc(sizeof(mList));
-    temp->num = 0 ;
-    head = temp ;
-    for(i = 1 ; i < 5 ; i++)
-    {
-        p = (mList *)malloc(sizeof(mList));
-        p->num = i ;
-        temp->next = p ;
-        temp = p ;
-    }
-    temp->next = NULL ;
-    return head ;
-}
-
-int showListMember(mList *head , int num)
-{
-    do
-    {
-        printf("%d\t",head->num);
-        num = num + 1 ;
-    }while(head = head->next);
-    return num ;
-}
-
-void resersal(mList *head,int numOfList)
-{
-    mList *next , *prev = NULL ;
-    int i ;
-    for(i = 0 ; i < numOfList  ; i ++)
-    {
-
-      //printf("test:%d\t",head->num);
-        next = head->next;
-        //printf("test in:%d\t",head->num);
-        head->next = prev;
-        prev = head ;
-        if(next == NULL)
-        {
-
-        }
-        else
-        {
-             head = next ;
-        }
-
-    }
-    printf("\n");
-    do
-    {
-        printf("%d\t",head->num);
-
-    }while(head = head->next);
-}
-
-int main()
-{
-    mList *head ;
-    head = init();
-    int numOfList = 0 , i ;
-    numOfList = showListMember(head ,numOfList);
-    resersal(head,numOfList);
-    return 0 ;
-}
-
-```
 
 #### 八个1排8x8，不同行同列（八皇后问题）
 ```c
@@ -769,3 +691,158 @@ int * bookSort(int * a , int head , int foot)
  }
 
  ```
+
+#### 二分查找
+```c
+int search(int * a ,int head, int foot,int target)
+{
+ printf("search:");
+ printf("head=%d,",head);
+ printf("foot=%d\n",foot);
+ int location ;
+ a = bookSort(a,head,foot);
+ int min ;
+
+ min = (head+foot)/2;
+ printf("---------------min=%d,a[min]=%d\n",min,a[min]);
+ if(a[min]>target)
+ {
+	 search(a,head,min-1,target);
+ }else if(a[min] < target)
+ {
+	 search(a,min+1,foot,target);
+ }else{
+	 location = min ;
+	 return location ;
+ }
+}
+```
+
+#### 回文数
+
+```c
+Scanner input = new Scanner(System.in);
+int head, foot, i;
+head = input.nextInt();
+i = head;
+foot = input.nextInt();
+while (i < foot) {
+		int shiWei = 0, geWei = 0, baiWei = 0, qianWei = 0, wanWei = 0;
+		if (i > 10000) {
+				wanWei = i / 10000;
+				qianWei = (i - 10000 * wanWei) / 1000;
+				baiWei = (i - 10000 * wanWei - 1000 * qianWei) / 100;
+				shiWei = (i - 10000 * wanWei - 1000 * qianWei - 100 * baiWei) / 10;
+				geWei = i % 10;
+
+				if (wanWei == geWei && qianWei == shiWei) {
+						System.out.println(i);
+				}
+		} else if (i > 1000) {
+				qianWei = i / 1000;
+				baiWei = (i - 1000 * qianWei) / 100;
+				shiWei = (i - 1000 * qianWei - 100 * baiWei) / 10;
+				geWei = i % 10;
+				if (qianWei == geWei && baiWei == shiWei) {
+						System.out.println(i);
+				}
+		} else if (i > 100) {
+				baiWei = i / 100;
+				shiWei = (i - 100 * baiWei) / 10;
+				geWei = i % 10;
+				if (baiWei == geWei) {
+						System.out.println(i);
+				}
+		} else if (i > 10) {
+				shiWei = i / 10;
+				geWei = i % 10;
+				if (shiWei == geWei){
+						System.out.println(i);
+				}
+		} else if (i > 0) {
+				geWei = i % 10;
+		}
+		i++;
+}
+}
+```
+
+#### 链表倒序
+```c
+#include<stdio.h>
+
+typedef struct listTest
+{
+    int num ;
+    struct listTest *next ;
+}mList;
+
+mList * init()
+{
+    int i ;
+    mList *head , *p , *temp;
+    temp = (mList *)malloc(sizeof(mList));
+    temp->num = 0 ;
+    head = temp ;
+    for(i = 1 ; i < 5 ; i++)
+    {
+        p = (mList *)malloc(sizeof(mList));
+        p->num = i ;
+        temp->next = p ;
+        temp = p ;
+    }
+    temp->next = NULL ;
+    return head ;
+}
+
+int showListMember(mList *head , int num)
+{
+    do
+    {
+        printf("%d\t",head->num);
+        num = num + 1 ;
+    }while(head = head->next);
+    return num ;
+}
+
+void resersal(mList *head,int numOfList)
+{
+    mList *next , *prev = NULL ;
+    int i ;
+    for(i = 0 ; i < numOfList  ; i ++)
+    {
+
+      //printf("test:%d\t",head->num);
+        next = head->next;
+        //printf("test in:%d\t",head->num);
+        head->next = prev;
+        prev = head ;
+        if(next == NULL)
+        {
+
+        }
+        else
+        {
+             head = next ;
+        }
+
+    }
+    printf("\n");
+    do
+    {
+        printf("%d\t",head->num);
+
+    }while(head = head->next);
+}
+
+int main()
+{
+    mList *head ;
+    head = init();
+    int numOfList = 0 , i ;
+    numOfList = showListMember(head ,numOfList);
+    resersal(head,numOfList);
+    return 0 ;
+}
+
+```
