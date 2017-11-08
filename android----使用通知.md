@@ -15,8 +15,8 @@ NotificationManager manager = (NotificationManager)getSystemService(Context.NOtT
 
 Notification Notification = new NotificationCompat.Builder(Context)
 .setContentTitle("This is content title")  //标题
-.setContentText("This is content text")     //内容
-.setWhen(System.currentTimeMillis())     //显示时间
+.setContentText("This is content text")     //内容1
+.setWhen(System.currentTimeMillis())     //显示时间
 .setSmallIcon(R.drawable.small_icon)    //设置通知的小图标
 .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.large_icon))
 .build();
