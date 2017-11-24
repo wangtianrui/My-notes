@@ -13,7 +13,7 @@ int max( int , int , int ) ;
 float max(float , float , float ) ;
 ```
 
-##  函数模版
+##  函数模版1
 
 自定义类型
 
