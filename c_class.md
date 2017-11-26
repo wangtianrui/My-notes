@@ -8,7 +8,7 @@ int main()
 	char * str;
 	int i  ;
 	gets(string);
-	printf("输入的是：");
+	printf("输入的字符串是：");
 	for(i = 0 ; i < strlen(string) ; i ++)
 	{
 		printf("%c",string[i]);
