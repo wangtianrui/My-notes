@@ -13,7 +13,7 @@ x = [[[1, 2],
 #将x看为下图的二维图
 ```
 
-![](E:\notes\tensorflow\reduce_mean.png)
+![](https://github.com/wangtianrui/My-notes/blob/master/tensorflow/reduce_mean.png)
 
 ```python
 y = tf.reduce_mean(x,0)  
