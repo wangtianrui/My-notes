@@ -17,6 +17,42 @@
 ##### sh新建文档后会发现右上角的网络图标没了 https://blog.csdn.net/carl_qi/article/details/50769282
 
 ```txt
-补充：在编辑文档时会遇到权限问题，这时需要 su root
+补充：在编辑文档时会遇到权限问题，这时需要 su root  获取root权限。然后cd到目标文件目录。sudo chmod +w Networkd....
+获得权限后就可以进行文件的编辑
 ```
 
+##### 镜像的使用
+
+```txt
+例如：pip install -i http://e.pypi.python.org/simple tensorflow   这个是使用的清华大学打镜像
+```
+
+##### 为sh文件创建快捷方式
+
+```txt
+新建appName.desktop  --> vim/gedit 编辑该文件;如下信息：
+
+[Desktop Entry]
+
+Encoding=UTF-8
+
+Name=webstorm
+
+Comment=webstorm IDE
+
+Exec=/home/yin/WebStorm-171.4424.58/bin/webstorm.sh
+
+Icon=/home/yin/WebStorm-171.4424.58/bin/webstorm.svg
+
+Terminal=false
+
+StartupNotify=true
+
+Type=Application
+
+Categories=Application;Development;
+
+
+```
+
+下载东西https://blog.csdn.net/Liuqz2009/article/details/52087019
