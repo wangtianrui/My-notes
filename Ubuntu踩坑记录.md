@@ -56,3 +56,21 @@ Categories=Application;Development;
 ```
 
 下载东西https://blog.csdn.net/Liuqz2009/article/details/52087019
+
+##### .deb文件安装
+
+```txt
+sudo dpkg -i 文件名
+会失败然后
+ sudo apt-get -f install
+ sudo netease-cloud-music
+```
+
+##### 复制文件
+
+```txt
+sudo mv 目标文件 目标目录  
+```
+
+![](https://images2015.cnblogs.com/blog/16576/201607/16576-20160710222051796-1907038675.png)
+
