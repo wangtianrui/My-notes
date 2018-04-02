@@ -74,3 +74,35 @@ sudo mv 目标文件 目标目录
 
 ![](https://images2015.cnblogs.com/blog/16576/201607/16576-20160710222051796-1907038675.png)
 
+##### 删除文件
+
+```txt
+   rmdir 目录名        （删除一个空文件夹，文件夹里有内容则不可用）
+
+　　rm -rf 非空目录名 （删除一个包含文件的文件夹）
+
+　　rm 文件名 文件名 （删除多个文件）
+```
+
+##### 创建文件
+
+```txt
+touch 文件名        （新建一个空文件）
+ mkdir 目录名        （新建一个文件夹，文件夹在Linux系统中叫做“目录”
+```
+
+##### 复制文件
+
+```txt
+cp 文件名 目标路径（拷贝一个文件到目标路径，如cp hserver /opt/hqueue）
+```
+
+
+
+##### git配置
+
+```txt
+https://www.cnblogs.com/superGG1990/p/6844952.html   git链接ssh
+https://blog.csdn.net/vosang/article/details/50499300   无法push
+```
+
