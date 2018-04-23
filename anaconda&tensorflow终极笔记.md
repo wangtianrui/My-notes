@@ -28,7 +28,15 @@ CUDA：
 
 下载9.0吧。+cudnn9.0的对应的tf是1.6.0    #网盘里有
 
-pip install-i <https://pypi.tuna.tsinghua.edu.cn/simple> tensorflow==1.6.0
+pip install -i <https://pypi.tuna.tsinghua.edu.cn/simple> tensorflow==1.6.0
+
+
+
+
+
+pip tensorflow 升降级
+
+
 
 
 
