@@ -160,9 +160,7 @@ SELECT * FROM student WHERE Sname LIKE '王%';
 SELECT * FROM ITEM ORDER BY Ino
 
 /*计数查询*/
-SELECT Tdegree,COUNT(Tdegree) 人数 FROM teacher GROUP BY Tdegree;   /*加上Tdegree用来做表时获得row的名，人数位置参数为col的名输出结果是:
-博士    	2
-硕士    	1
-*/
+SELECT Tdegree,COUNT(Tdegree) 人数 FROM teacher GROUP BY Tdegree;   /*加上Tdegree用来做表时获得row的名，人数位置参数为col的名输出结果是下图*/
 ```
 
+![](https://github.com/wangtianrui/My-notes/blob/master/pictures/3.png)
