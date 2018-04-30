@@ -133,3 +133,4 @@ os.path.join(“home”, "me", "mywork")
 "home\me\mywork"
 好处是可以根据系统自动选择正确的路径分隔符"/"或"\"
 ```
+
