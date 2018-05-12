@@ -1,7 +1,7 @@
 ## 全局const
 
 ```c++
-const int b = 1 ;    //防止了define的“替换”的缺点
+const int b = 1 ;    //防止了define“替换”的缺点
 ```
 
 ## 方法的重载
