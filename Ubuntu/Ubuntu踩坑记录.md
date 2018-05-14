@@ -24,7 +24,10 @@
 ##### 镜像的使用
 
 ```txt
-例如：pip install -i http://e.pypi.python.org/simple tensorflow   这个是使用的清华大学打镜像
+例如：pip install -i http://e.pypi.python.org/simple 
+
+ https://pypi.douban.com/simple
+tensorflow   这个是使用的清华大学打镜像
 ```
 
 ##### 为sh文件创建快捷方式

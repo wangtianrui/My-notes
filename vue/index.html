@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Vue入门</title>
+    <!-- 标签引入放到head里 -->
+    <script src="./vue.js"></script>     
+  </head>
+  <body>
+    <!-- <div id="root"> hello world </div> -->
+    <div id="root">{{msg}}</div>
+    <script>
+    new Vue({
+      // 井号是指id=root
+      el:"#root"   ,
+      data:{
+        msg:"hello world"
+      }
+    })</script>
+  </body>
+</html>
