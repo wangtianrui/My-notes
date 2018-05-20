@@ -50,6 +50,8 @@ confidence就是预测的bounding box和ground truth box的IOU值。
 
 ### v2
 
+参考：https://blog.csdn.net/jesse_mx/article/details/53925356
+
 ##### 在v1的基础上，增删了很多操作。将mAP值增加到了78.6
 
 ![](https://img-blog.csdn.net/20161229151800828?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmVzc2VfTXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
@@ -83,3 +85,40 @@ CNN在训练过程中网络每层输入的分布一直在改变, 会使训练过
 ![](https://img-blog.csdn.net/20161229113104156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmVzc2VfTXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 可以看到，平衡复杂度和IOU之后，最终得到k值为5，意味着作者选择了5种大小的box维度来进行定位预测，这与手动精选的box维度不同。结果中扁长的框较少，而瘦高的框更多（这符合行人的特征），这种结论如不通过聚类实验恐怕是发现不了的。
+
+* Direct location prediction
+
+那么，作者在使用anchor boxes时发现的**第二个问题就是：模型不稳定，尤其是在早期迭代的时候**。大部分的不稳定现象出现在预测box的 (x,y)(x,y) 坐标上了。在区域建议网络中，预测 (x,y)(x,y) 以及 txtx，tyty 使用的是如下公式：
+
+![](https://ws1.sinaimg.cn/large/0067fcixly1frhr1hih2wj305k01c3yb.jpg)					
+
+这个公式的理解为：当预测 tx=1tx=1，就会把box向右边移动一定距离（具体为anchor box的宽度），预测 tx=−1tx=−1，就会把box向左边移动相同的距离。
+
+这个公式没有任何限制，使得无论在什么位置进行预测，任何anchor boxes可以在图像中任意一点结束（我的理解是，txtx没有数值限定，可能会出现anchor检测很远的目标box的情况，效率比较低。正确做法应该是每一个anchor只负责检测周围正负一个单位以内的目标box）。模型随机初始化后，需要花很长一段时间才能稳定预测敏感的物体位置。
+
+在此，作者就没有采用预测直接的offset的方法，而使用了预测相对于grid cell的坐标位置的办法，作者又把ground truth限制在了0到1之间，利用logistic回归函数来进行这一限制。
+
+![](https://img-blog.csdn.net/20161229143041650?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmVzc2VfTXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+现在，神经网络在特征图（13 *13 ）的每个cell上预测5个bounding boxes（聚类得出的值），同时每一个bounding box预测5个坐值，分别为 tx,ty,tw,th,totx,ty,tw,th,to ，其中前四个是坐标，toto是置信度。如果这个cell距离图像左上角的边距为 (cx,cy)(cx,cy) 以及该cell对应box（bounding box prior）的长和宽分别为 (pw,ph)(pw,ph)，那么预测值可以表示为：
+
+![](https://img-blog.csdn.net/20161229113525333?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmVzc2VfTXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+![](https://img-blog.csdn.net/20161229113953466?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSmVzc2VfTXg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+这几个公式参考上面Faster-RCNN和YOLOv1的公式以及下图就比较容易理解。tx,tytx,ty 经sigmod函数处理过，取值限定在了0~1，实际意义就是使anchor只负责周围的box，有利于提升效率和网络收敛。σσ 函数的意义没有给，但估计是把归一化值转化为图中真实值，使用 ee 的幂函数是因为前面做了 lnln 计算，因此，σ(tx)σ(tx)是bounding box的中心相对栅格左上角的横坐标，σ(ty)σ(ty)是纵坐标，σ(to)σ(to)是bounding box的confidence score。
+
+* Fine-Grained Features 这个还不是很理解。得看源码
+* Multi-Scale Training
+
+原来的YOLO网络使用固定的448 * 448的图片作为输入，现在加入anchor boxes后，输入变成了416 * 416。目前的网络只用到了卷积层和池化层，那么就可以进行动态调整（意思是可检测任意大小图片）。作者希望YOLOv2具有不同尺寸图片的鲁棒性，因此在训练的时候也考虑了这一点。
+
+不同于固定输入网络的图片尺寸的方法，作者在几次迭代后就会微调网络。没经过10次训练（10 epoch），就会随机选择新的图片尺寸。YOLO网络使用的降采样参数为32，那么就使用32的倍数进行尺度池化{320,352，…，608}。最终最小的尺寸为320 * 320，最大的尺寸为608 * 608。接着按照输入尺寸调整网络进行训练。
+
+这种机制使得网络可以更好地预测不同尺寸的图片，意味着同一个网络可以进行不同分辨率的检测任务，在小尺寸图片上YOLOv2运行更快，在速度和精度上达到了平衡。
+
+在小尺寸图片检测中，YOLOv2成绩很好，输入为228 * 228的时候，帧率达到90FPS，mAP几乎和Faster R-CNN的水准相同。使得其在低性能GPU、高帧率视频、多路视频场景中更加适用。
+
+* Darknet-19
+
+YOLOv2使用了一个新的分类网络作为特征提取部分，参考了前人的先进经验，比如类似于VGG，作者使用了较多的3 * 3卷积核，在每一次池化操作后把通道数翻倍。借鉴了network in network的思想，网络使用了全局平均池化（global average pooling），把1 * 1的卷积核置于3 * 3的卷积核之间，用来压缩特征。也用了batch normalization（前面介绍过）稳定模型训练。
