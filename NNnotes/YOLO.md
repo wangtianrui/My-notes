@@ -122,3 +122,9 @@ CNN在训练过程中网络每层输入的分布一直在改变, 会使训练过
 * Darknet-19
 
 YOLOv2使用了一个新的分类网络作为特征提取部分，参考了前人的先进经验，比如类似于VGG，作者使用了较多的3 * 3卷积核，在每一次池化操作后把通道数翻倍。借鉴了network in network的思想，网络使用了全局平均池化（global average pooling），把1 * 1的卷积核置于3 * 3的卷积核之间，用来压缩特征。也用了batch normalization（前面介绍过）稳定模型训练。
+
+
+
+#### v3
+
+https://www.cnblogs.com/makefile/p/YOLOv3.html
