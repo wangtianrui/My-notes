@@ -1,0 +1,22 @@
+clone之后，git branch查看分支数
+
+然后使用命令从远程再拉两个分支
+git fetch origin develop:develop
+git fetch origin yourname:yourname
+这样就把主开发分支和属于你自己的分支在本地创建了，但是还没有和远程连接起来，使用下面的命令将这两个分支与远程连接起来:
+
+git branch --set-upstream-to=origin develop
+git branch --set-upstream-to=origin yourname
+
+这样你就可以之间提交代码到GitHub上的仓库了。
+
+我们项目的最新进展都是在develop上的，所以你向develop上提交时要得到leader的允许。
+
+我们自己在本地写的时候必须在以自己命名的那个分支上写，不要随便的污染主开发分支develop，只有你觉得你负责的这个功能没什么问题时，你将yourname分支上的代码合并到你本地的develop分支上
+
+假如说现在有一个人完成了他的部分功能，他就可以向develop上提交这个代码，leader检查后合并到develop上，这时其他人就落后了一个版本，这时候，其他所有人都得切换到develop分支上(使用命令git checkout develop)执行git pull,将这个新的功能更新到本地，但是你一直都是在yourname上开发的，所以要将新pull下来的内容合并到yourname分支上，使用git merge yourname,然后git checkout yourname继续开发
+
+push的时候情况就更复杂了，一定要仔细仔细仔细仔细的看下面这篇文章
+https://juejin.im/entry/56263cfd00b0023ca69de5ec
+
+我们晚上在详细的聊聊这个流程
