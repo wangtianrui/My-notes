@@ -58,7 +58,7 @@ while True:
     num = num + 1
     if key == ord('q'):
         break
-
+#
 video.release()
 capture.release()
 cv2.destroyAllWindows()
