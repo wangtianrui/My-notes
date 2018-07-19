@@ -20,7 +20,7 @@ Windows：activate snowflake
 
 
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --set show_channel_urls yes     #conda镜像设置
+conda config --set show_channel_urls yes        #conda镜像设置
 
 
 
