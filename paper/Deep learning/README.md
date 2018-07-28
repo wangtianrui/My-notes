@@ -2,8 +2,8 @@
 
 #### machine-learning --> deep-learning
 
-| machine-learning                         | deep-learning                            |
-| :--------------------------------------- | :--------------------------------------- |
+|             machine-learning             |              deep-learning               |
+| :--------------------------------------: | :--------------------------------------: |
 | limited in their ability to process natural data in their raw form | a feature extractor that transformed the raw data (such as the pixel values of an image) into a suitable internalrepresentation or feature vector from which the learning subsystem, often a classifier, could detect or classify patterns in the input. |
 
 * deep-learning can deal raw data by itself (end-to-end)
@@ -51,6 +51,18 @@
   |        ReLU        |              f(z)= max(0,z)              |
   | hyberbolic tangent | f(z) =(exp(z)− exp(−z))/(exp(z)+ exp(−z)) |
   |       sigmod       |           f(z) =1/(1+ exp(−z))           |
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### CNN - image model
 
