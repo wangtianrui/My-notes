@@ -1,32 +1,74 @@
-为什么效果变差。因为映射有问题 ，所以不让每层能够直接地去形成一个“最优”映射，而是通过另一个映射：
+### As a whole
 
-f(x)+x    但是层数必须得上去 ， 加法求导，也是加法，所以相当于是分解问题！
+* present  residual learning framework : 152 layers—8×deeper than VGG nets but still having lower com-plexity.
+
+### Detail Point
+
+* what is the residual ? 
+
+$$
+\eta=y_{label} - y_{pred}
+$$
+
+* how and why they present residual learning framework ?
+  * they noticed When deeper networks are able to start converging , adegradation problem has been exposed.
+  * but this problem is not caused by overfitting . (compare the train_data_set error and test_data_set error)
+  * if the added layers can be constructed as identity mappings, a deeper model should have training error no greater than its shallower counterpart.(caused by Identity mapping can not find the best mapping)
+  * so they add residual to change the mapping !
+* residual function
+
+$$
+F(x) = H(x)-x
+$$
+
+* residual mapping function 
+
+$$
+y = f(x,\omega)+x \\st.f(x,\omega).shape =x.shape
+$$
+
+* we can perform a linear projection Ws by the shortcut connections to match the dimensions
+
+$$
+y = f(x,\omega_i)+\omega_{j} x \\st.f(x,\omega_i).shape \neq x.shape
+$$
+
+* net framework 
+
+  * Plain Network
+
+    inspired by the pholosophy of VGG nets. （都是较深的网络）
+
+    ①so the conv size is 3x3
+
+    ②for the same output feature map size,the layers have the same number of filters (只要图像size不变卷积核数就不变)
+
+    ③if the feature map size is halved , the number of filters is doubled ! (图像size减半，卷积核数增倍)
+
+    ④ conv have a stride of 2 .
+
+    ⑤average pooling and 1000-fc with softmax (the end)
+
+* Deeper Botteleneck Architectures
+
+  For each residual function F, we use a stack of 3 layers instead of 2.
+
+  The three layers are : 1x1 ,  3x3  ,  1x1  conv .
+
+  前一个1x1是负责减小维度（通过filter的数量），后一个1x1是负责增大维度（把减小的给增回来）。个人理解这里的1x1还能增加一个上一个输出的各层之间的关系。
+
+  这个方法的优点：论文上只说了加快训练时间。个人觉得还能减少参数的数量
+
+### Advatages
+
+* 解决了深度网络的“退化”问题。
 
 
-
-残差为
-
- ![img](https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D141/sign=7706116f9c0a304e5622a4fee0c8a7c3/34fae6cd7b899e5185aa5f7f49a7d933c8950db0.jpg) 
-
-
-
+* 使用残差函数作为优化目标不会增加复杂度。（个人理解：使用残差函数作为优化目标后的mapping函数为$y=f(x,\omega)+x$，这里只是在原基础上加了一个X的映射，但是我们求梯度的时候是对$\omega$求导，所以加上的项是只对输出的结果有意义。对我们的优化却不影响）
+* 既然深度网络的退化问题解决了，那么也肯定有所提升。
+* 比VGG的复杂度低，效果也比VGG好。
+  * vgg19:2$\times$conv3-64+2$\times$conv3-128+4$\times$conv3-256+4$\times$conv3-512 + maxpool + 2$\times$fc-4096 + fc-1000 
+  * ResNet34: conv7-64+max-pool3+3$\times$conv3-64+4$\times$conv3-128+6$\times$conv3-256+3$\times$conv3-512 +aver-agepool + fc-1000
 
 
-
-
-我们每隔几个堆叠层采用残差学习。构建块如图2所示。在本文中我们考虑构建块正式定义为：
-
-$$y = F(x, {W_i}) + x$$ (1)
-
-$x$和$y$是考虑的层的输入和输出向量。函数$F(x, {W_i})$表示要学习的残差映射。图2中的例子有两层，$F = W_2 \sigma(W_1x)$中$\sigma$表示ReLU[29]，为了简化写法忽略偏置项。$F + x$操作通过快捷连接和各个元素相加来执行。在相加之后我们采纳了第二种非线性（即$\sigma(y)$，看图2）。
-
-公式(1)中的快捷连接既没有引入外部参数又没有增加计算复杂度。这不仅在实践中有吸引力，而且在简单网络和残差网络的比较中也很重要。我们可以公平地比较同时具有相同数量的参数，相同深度，宽度和计算成本的简单/残差网络（除了不可忽略的元素加法之外）。
-
-方程(1)中$x$和$F$的维度必须是相等的。如果不是这种情况（例如，当更改输入/输出通道时），我们可以通过快捷连接执行线性投影$W_s$来匹配维度：
-
-$$y = F(x, {W_i }) + W_sx.$$
-
-我们也可以使用方程(1)中的方阵$W_s$。但是我们将通过实验表明，恒等映射足以解决退化问题，并且是合算的，因此$W_s$仅在匹配维度时使用。
-
-残差函数$F$的形式是可变的。本文中的实验包括有两层或三层（图5）的函数$F$，同时可能有更多的层。但如果$F$只有一层，方程(1)类似于线性层：$y = W_1x + x$，我们没有看到优势。
 
