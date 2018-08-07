@@ -19,6 +19,10 @@ Windows：activate snowflake
 
 
 
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#xgboost
+
+
+
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --set show_channel_urls yes        #conda镜像设置
 
