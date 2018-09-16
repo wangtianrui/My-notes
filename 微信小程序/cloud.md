@@ -1,0 +1,1 @@
+project.config.json  增加了 cloudfunctionRoot

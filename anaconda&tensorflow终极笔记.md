@@ -15,7 +15,7 @@ Windows：activate snowflake
 
 开始调用pip和conda进行必要包的安装
 
--i <https://pypi.tuna.tsinghua.edu.cn/simple>              #pip镜像
+-i <https://pypi.tuna.tsinghua.edu.cn/simple>                  #pip镜像
 
 
 
@@ -51,6 +51,17 @@ session = tf.Session(config=config)
 config = tf.ConfigProto() 
 config.gpu_options.allow_growth = True 
 session = tf.Session(config=config)
+
+
+
+
+
+查看当前python路径
+
+```python
+import sys
+print(sys.executable)
+```
 
 
 
