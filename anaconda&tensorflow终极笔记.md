@@ -15,7 +15,7 @@ Windows：activate snowflake
 
 开始调用pip和conda进行必要包的安装
 
--i <https://pypi.tuna.tsinghua.edu.cn/simple>                  #pip镜像
+-i <https://pypi.tuna.tsinghua.edu.cn/simple>                 #pip镜像
 
 
 
@@ -24,6 +24,7 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#xgboost
 
 
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+
 conda config --set show_channel_urls yes        #conda镜像设置
 
 
