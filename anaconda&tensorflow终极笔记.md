@@ -35,6 +35,8 @@ CUDA：
 
 pip install -i <https://pypi.tuna.tsinghua.edu.cn/simple> tensorflow==1.6.0
 
+最好下最新的
+
 
 
 
