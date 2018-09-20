@@ -35,7 +35,7 @@ while True:
     # 直方图均衡处理
     gray = cv2.equalizeHist(gray)
 
-    # 脸部特征分类地址，里面还有其他E:\\face_detect\\haarcascade_frontalface_default.xml  ，haarcascade_frontalface_alt.xml
+    # 脸部特征的分类地址，里面还有其他E:\\face_detect\\haarcascade_frontalface_default.xml  ，haarcascade_frontalface_alt.xml
     cascade_fn = 'E:/opencv/opencv/sources/data/haarcascades/haarcascade_frontalface_alt.xml'
 
     # 读取分类器,CascadeClassifier下面有一个detectMultiScale方法来得到矩形
