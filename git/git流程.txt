@@ -1,12 +1,13 @@
 clone之后，git branch查看分支数
 
 然后使用命令从远程再拉两个分支
+这里必须切到master分支
 git fetch origin develop:develop
 git fetch origin yourname:yourname
 这样就把主开发分支和属于你自己的分支在本地创建了，但是还没有和远程连接起来，使用下面的命令将这两个分支与远程连接起来:
 
-git branch --set-upstream-to=origin develop
-git branch --set-upstream-to=origin yourname
+git branch --set-upstream-to=origin/develop develop
+git branch --set-upstream-to=origin/develop yourname
 
 这样你就可以之间提交代码到GitHub上的仓库了。
 
