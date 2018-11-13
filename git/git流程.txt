@@ -12,6 +12,12 @@ git branch --set-upstream-to=origin/develop yourname
 
 这样你就可以之间提交代码到GitHub上的仓库了。
 
+在自己的分支上向组长仓库的自己分支提交代码的操作为：
+git add .
+git commit -m "message"   //上面两个为常规本地保存和提交操作
+git pull origin yourname    //在提交前先pull确保其他组员更新的代码加载到了自己的本地，这个操作后运行代码检查无误后再进行下面的操作
+git push origin yourname    //确认无误后提交 一般组员合代码都是在develop上 所以yourname一般为develop
+
 我们项目的最新进展都是在develop上的，所以你向develop上提交时要得到leader的允许。
 
 我们自己在本地写的时候必须在以自己命名的那个分支上写，不要随便的污染主开发分支develop，只有你觉得你负责的这个功能没什么问题时，你将yourname分支上的代码合并到你本地的develop分支上
