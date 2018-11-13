@@ -1,4 +1,5 @@
-clone之后，git branch查看分支数
+从组长的仓库clone之后，在本地项目下鼠标右键打开git操作指令对话框
+git branch查看分支数（这个时候一般只有master分支）
 
 然后使用命令从远程再拉两个分支
 这里必须切到master分支
@@ -19,5 +20,3 @@ git branch --set-upstream-to=origin/develop yourname
 
 push的时候情况就更复杂了，一定要仔细仔细仔细仔细的看下面这篇文章
 https://juejin.im/entry/56263cfd00b0023ca69de5ec
-
-我们晚上在详细的聊聊这个流程
