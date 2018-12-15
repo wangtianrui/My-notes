@@ -88,3 +88,38 @@ private String content;
 private Blob photo;
 ```
 
+### RenderUI渲染
+
+```java
+public static void index() {
+    User bob = new User("1056992492@qq.com", "wang123", "ScorpioMiku", "1");
+    bob.save();
+    render(bob);
+    /*
+     boolean isOk = false;
+     render(bob, isOk);
+    */
+}
+```
+
+```html
+#{extends 'main.html' /}
+#{set title:'Home' /}
+#{hello_test/}
+<div>
+    Hello ${bob.fullName}!
+</div>
+
+#{if isOk}
+    <div>
+        Hello is ok
+    </div>
+#{/if}
+#{else }
+    <div>
+        Hello is False
+    </div>
+#{/else}
+```
+
+### html
