@@ -85,13 +85,53 @@ top_oceania_wines = reviews.loc[
 ]  
 ```
 
+##### 根据条件分组
+
+```python
+reviews.groupby('points').points.count()    #按points的值进行分组，并得到count
+
+reviews.groupby('points').price.min()	#得到每组的最小值
+
+reviews.groupby('winery').apply(lambda df: df.title.iloc[0]) #每个酿酒厂中审查的第一瓶葡萄酒的名字
+
+#可以根据多条件分组，再取出里面的最好的
+reviews.groupby(['country', 'province']).apply(lambda df: df.loc[df.points.argmax()]) 
+
+#另一个值得一提的groupby方法是agg，它允许你同时在DataFrame上运行一堆不同的函数。例如，我们可以生成数据集的简单统计摘要，如下所示：
+reviews.groupby(['country']).price.agg([len, min, max])
+
+#根据多个index进行分类
+countries_reviewed = reviews.groupby(['country', 'province']).description.agg([len])
+```
+
+##### 排序
+
+```python
+countries_reviewed = countries_reviewed.reset_index()
+countries_reviewed.sort_values(by='len')
+countries_reviewed.sort_values(by='len', ascending=False)
+
+countries_reviewed.sort_index()	#根据默认索引排序
+
+countries_reviewed.sort_values(by=['country', 'len'])#根据多行索引
+```
+
 ##### Nan值处理
 
 ```python
+missing_price_reviews = reviews[reviews.price.isnull()]
+n_missing_prices = len(missing_price_reviews)
+# Cute alternative solution: if we sum a boolean series, True is treated as 1 and False as 0
+n_missing_prices = reviews.price.isnull().sum()
+# or equivalently:
+n_missing_prices = pd.isnull(reviews.price).sum()
+
 #丢弃Nan值的行！
 # "all"：所有为Nan
 # "any" :包含Nan
 X_train.dropna(axis=0, how="all")
+
+reviews_per_region = reviews.region_1.fillna('Unknown').value_counts().sort_values(ascending=False)
 ```
 
 ##### 广播
@@ -152,5 +192,34 @@ def fillNanWithMean(df):
         mean_val = df[column].mean()
         df[column].fillna(mean_val, inplace=True)
     return df
+```
+
+##### 数据类型
+
+```python
+dtype = reviews.points.dtype 
+
+point_strings = reviews.points.astype(str) #强转
+```
+
+##### 改名
+
+```python
+renamed = reviews.rename(columns=dict(region_1='region', region_2='locale'))
+```
+
+##### 拼接
+
+```python
+gaming_products = pd.read_csv("../input/things-on-reddit/top-things/top-things/reddits/g/gaming.csv")
+gaming_products['subreddit'] = "r/gaming"
+movie_products = pd.read_csv("../input/things-on-reddit/top-things/top-things/reddits/m/movies.csv")
+movie_products['subreddit'] = "r/movies"
+
+#把两个dataframe拼接起来
+combined_products = pd.concat([gaming_products, movie_products])
+
+# 将两个表根据某列值进行对应拼接
+powerlifting_combined = powerlifting_meets.set_index("MeetID").join(powerlifting_competitors.set_index("MeetID"))
 ```
 
