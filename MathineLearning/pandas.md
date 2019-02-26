@@ -223,3 +223,19 @@ combined_products = pd.concat([gaming_products, movie_products])
 powerlifting_combined = powerlifting_meets.set_index("MeetID").join(powerlifting_competitors.set_index("MeetID"))
 ```
 
+##### 可视化
+
+https://www.kaggle.com/residentmario/univariate-plotting-with-pandas
+
+![](http://wx1.sinaimg.cn/mw690/0067fcixly1g0zx80crxxj30e4042jrf.jpg)
+
+```python
+reviews['province'].value_counts().head(10).plot.bar()  #根据前10个province的数量进行画bar
+
+(reviews['province'].value_counts().head(10) / len(reviews)).plot.bar()  #画出比例
+
+reviews['points'].value_counts().sort_index().plot.bar() #排序后画出
+reviews['points'].value_counts().sort_index().plot.line() #排序后画出线
+reviews['points'].value_counts().sort_index().plot.area() #对应上面的图
+```
+
