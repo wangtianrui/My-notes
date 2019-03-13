@@ -28,6 +28,9 @@
 
  https://pypi.douban.com/simple
 tensorflow   这个是使用的清华大学打镜像
+
+
+
 ```
 
 ##### 为sh文件创建快捷方式
@@ -111,3 +114,6 @@ https://blog.csdn.net/vosang/article/details/50499300   无法push
 
 
 
+jupyter notebook修改主题
+
+https://blog.csdn.net/wh8514/article/details/81532286
