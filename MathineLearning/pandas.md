@@ -141,6 +141,9 @@ review_points_mean = reviews.points.mean()
 reviews.points - review_points_mean  #广播运算
 
 reviews.country + " - " + reviews.region_1  #两列直接合并
+
+# 先把数量大于1的列干掉
+df_train = df_train.drop((missing_data[missing_data['Total'] > 1]).index, axis=1)
 ```
 
 ##### 根据某条件（字典）替换dataframe中数据
@@ -218,6 +221,10 @@ movie_products['subreddit'] = "r/movies"
 
 #把两个dataframe拼接起来
 combined_products = pd.concat([gaming_products, movie_products])
+# 拼接两列
+data = pd.concat([df_train['SalePrice'], df_train["GrLivArea"]],axis=1)
+# 拼接两列，并命名为Total与Percent
+missing_data = pd.concat([total,percent],axis=1,keys=['Total','Percent'])
 
 # 将两个表根据某列值进行对应拼接
 powerlifting_combined = powerlifting_meets.set_index("MeetID").join(powerlifting_competitors.set_index("MeetID"))

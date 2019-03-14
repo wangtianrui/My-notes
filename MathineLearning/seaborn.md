@@ -33,3 +33,16 @@ f = (
 sns.heatmap(f, annot=True)
 ```
 
+直方图
+
+```python
+sns.distplot(df_train["SalePrice"])
+
+# 正态性对比图
+# 
+sns.distplot(df_train[var_price], fit=norm)
+fig = plt.figure()
+# 用来观测目标值与预测值之间的差异。红线是正态分布，蓝点是目标值
+res = stats.probplot(df_train[var_price], plot=plt)
+```
+

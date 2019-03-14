@@ -24,7 +24,7 @@
 ##### 镜像的使用
 
 ```txt
-例如：pip install -i http://e.pypi.python.org/simple 
+例如：pip install -i  https://pypi.douban.com/simple
 
  https://pypi.douban.com/simple
 tensorflow   这个是使用的清华大学打镜像
@@ -117,3 +117,7 @@ https://blog.csdn.net/vosang/article/details/50499300   无法push
 jupyter notebook修改主题
 
 https://blog.csdn.net/wh8514/article/details/81532286
+
+代码提示
+
+<https://www.cnblogs.com/qiuxirufeng/p/9609031.html>
