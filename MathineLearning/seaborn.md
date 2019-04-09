@@ -46,3 +46,10 @@ fig = plt.figure()
 res = stats.probplot(df_train[var_price], plot=plt)
 ```
 
+设置主题
+
+```python
+color = sns.color_palette()
+sns.set_style("darkgrid")
+```
+

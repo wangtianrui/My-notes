@@ -41,7 +41,7 @@ review_points_mean = reviews.points.mean()
 reviews.points.map(lambda p: p - review_points_mean)
 
 median_points = reviews.points.median()  #获取中位数
-
+all_data['MSZoning'].mode()[0] #获取众数->【0】
 
 bargain_idx = (reviews.points / reviews.price).idxmax()
 bargain_wine = reviews.loc[bargain_idx, 'title']  #获得“价格比”最高的葡萄酒
@@ -83,6 +83,9 @@ top_oceania_wines = reviews.loc[
     (reviews.country.isin(['Australia', 'New Zealand']))
     & (reviews.points >= 95)
 ]  
+
+# 直接获取某列值
+y_train = train.SalePrice.values
 ```
 
 ##### 根据条件分组
@@ -244,5 +247,47 @@ reviews['province'].value_counts().head(10).plot.bar()  #根据前10个province�
 reviews['points'].value_counts().sort_index().plot.bar() #排序后画出
 reviews['points'].value_counts().sort_index().plot.line() #排序后画出线
 reviews['points'].value_counts().sort_index().plot.area() #对应上面的图
+```
+
+#### 去重
+
+```python
+# 第一种方法是使用groupby，但是只能统计到出现的次数，没有把每行保留下来
+card_group=card_df.groupby(['id','how'])['amount'].sum()
+# 第二章是透视表方法，可以根据一个或多个键值进行聚合
+card_df.pivot_table('amount',index=['id'],columns=['how'],aggfunc=sum)
+# 转dict
+label_dict = df_label.set_index("target").T.to_dict("list")
+```
+
+##### 删除
+
+```python
+# 删除包含某字符串的行，，还没有找到更好的方法，目前用的这个
+df.drop(df.index[[1090896,1090892,1090891,1090890,1090889]],inplace=True)
+df[df['Content'].str.contains('分享图片')==True].index
+
+
+# 曲线救国
+df_train_data = df_name_label[df_name_label.fold.isin([1,2,3,4])]
+```
+
+##### 显示设置
+
+```python
+# 限制float数只显示小数点三位
+pd.set_option('display.float_format', lambda x: '{:.3f}'.format(x)) 
+```
+
+##### 虚拟变量
+
+```python
+>>> pd.get_dummies(pd.Series(list('abcaa')))
+   a  b  c
+0  1  0  0
+1  0  1  0
+2  0  0  1
+3  1  0  0
+4  1  0  0
 ```
 
