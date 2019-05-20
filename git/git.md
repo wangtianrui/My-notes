@@ -73,3 +73,15 @@
 >git merge dev 合并分支（切换回主支再用）
 
 >git branch -d dev 删除分支
+
+
+
+* 信息查看
+
+```git
+git config --list  //查看已设置信息
+git config --global --list //查看全局属性的信息
+
+git remote add origin http://git.......... //远程连接
+```
+
