@@ -73,3 +73,22 @@ next_siblings
 ```
 
 #### 高级检索
+
+> find_all( name , attrs , recursive , text , **kwargs )
+* name:该参数可以查找所有名为name的tag，字符串对象会被忽视
+```python
+# 1、传字符串
+soup.find_all('b')
+
+# 2、传正则表达
+soup.find_all(re.compile("^b))
+
+# 3、传列表
+soup.find_all(["a","b"])
+
+# 4、传True，可以匹配任何值
+soup.find_all(True)
+
+# 5、传方法
+soup.find_all(my_function_name)
+```

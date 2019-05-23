@@ -282,12 +282,66 @@ pd.set_option('display.float_format', lambda x: '{:.3f}'.format(x))
 ##### 虚拟变量
 
 ```python
->>> pd.get_dummies(pd.Series(list('abcaa')))
+pd.get_dummies(pd.Series(list('abcaa')))
+"""
    a  b  c
 0  1  0  0
 1  0  1  0
 2  0  0  1
 3  1  0  0
 4  1  0  0
+"""
 ```
 
+##### 常用方法汇总（按数据预处理顺序来）
+
+```python
+# 获取列名
+df_train.columns
+
+#某列的分布可视化，纵坐标是数量比例
+sns.distplot(df_train["LABEL"])
+
+# 查看整体数据的Null数量
+df_train.isnull().sum()
+
+#如果数据是回归型，可以使用散点图来进行可视化（离散型不推荐）
+var = "RATING"
+# pandas的连接函数
+# pd.concat(data,axis)
+# data是一个二维数组，例子如下
+data = pd.concat([df_train['LABEL'], df_train[var]],axis=1)
+data.plot.scatter(x="LABEL", y=var, ylim=(0, 6)
+
+# 查看某列，各种数据的数量分布（适用于离散属性）
+df_train['RATING'].value_counts().plot.bar() 
+# 排序后画出
+reviews['points'].value_counts().sort_index().plot.bar() 
+
+# 查看某两列的箱线图，可以比较明显地看出这两列的相关性
+sns.boxplot(x='LABEL', y='REVIEW_ID', data=df_train)
+
+# astype()方法能把简单的数字的文本转换成数字，但是复杂的文本不行，复杂的得自己写函数转换
+data["2016"].astype("int")
+def convert_currency(value):
+    """
+    转换字符串数字为float类型
+    - 移除 ￥ ,
+    - 转化为float类型
+    """
+    new_value = value.replace(',', '').replace('￥', '')
+    return np.float(new_value)
+ data['2016'].apply(convert_currency)
+
+ # 如果离散值数量不多。可以直接使用get_dummies
+ #get_dummies可以把所有输入的df转换，如下取出了原数据的某几列一起弄，数字类变量不做改变
+ pd.get_dummies(df_train[['PRODUCT_CATEGORY','LABEL','RATING','VERIFIED_PURCHASE']],drop_first = True)
+ 
+ # 可以只获取出与某列的相关系数
+ df_train.corr()['LABEL'].sort_values()
+
+ #转换为数字后，可以查看相关性
+ corrmat = df_train.corr()
+ print(corrmat)
+ sns.heatmap(corrmat)
+```
