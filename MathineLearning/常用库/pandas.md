@@ -334,6 +334,7 @@ def convert_currency(value):
  data['2016'].apply(convert_currency)
 
  # 如果离散值数量不多。可以直接使用get_dummies
+ # drop_first一般设置为True，因为第一列可以用其他列推出
  #get_dummies可以把所有输入的df转换，如下取出了原数据的某几列一起弄，数字类变量不做改变
  pd.get_dummies(df_train[['PRODUCT_CATEGORY','LABEL','RATING','VERIFIED_PURCHASE']],drop_first = True)
  
@@ -344,4 +345,20 @@ def convert_currency(value):
  corrmat = df_train.corr()
  print(corrmat)
  sns.heatmap(corrmat)
+```
+
+
+##### 对于一些“话”的处理
+```python
+# 使用 TF-IDF
+
+# 第一步我们要获取到每句话的文本长度
+# split()默认按“ ”分割，
+length_tra = df_train['REVIEW_TEXT'].apply(lambda x: len(x.split())).values
+# 横轴是数据值，纵轴是出现次数
+plt.hist(length_tra)
+
+# 如果分布过于极端->使用Log纠正
+length_train = np.log(length_tra)
+
 ```
