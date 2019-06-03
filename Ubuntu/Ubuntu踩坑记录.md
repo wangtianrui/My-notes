@@ -26,8 +26,12 @@
 ```txt
 例如：pip install -i  https://pypi.douban.com/simple
 
- https://pypi.douban.com/simple
-tensorflow   这个是使用的清华大学打镜像
+http://mirrors.aliyun.com/pypi/simple/
+
+https://pypi.mirrors.ustc.edu.cn/simple/
+
+http://pypi.hustunique.com/
+tensorflow   
 
 
 
