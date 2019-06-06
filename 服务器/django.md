@@ -1,3 +1,5 @@
+https://docs.djangoproject.com/zh-hans/2.1/intro/
+
 ##### 安装专业版pycharm
 
 ##### 新建django项目
