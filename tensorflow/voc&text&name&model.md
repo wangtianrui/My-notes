@@ -90,3 +90,54 @@ def highwaynet(inputs, scope, depth):
         return H * T + inputs * (1.0 - T)
 ```
 
+* ##### Attention
+
+  > BathdanauAttention
+
+  ```python
+  """
+  def __init__(self,
+      num_units,
+      memory,
+      memory_sequence_length=None,
+      normalize=False,
+      probability_fn=None,
+      score_mask_value=None,
+      dtype=None,
+      name="BahdanauAttention"):
+  """
+  BahdanauAttention(hp.attention_depth, encoder_outputs)
+  """
+  numunits：神经元节点数，我们知道在计算
+  memory：The memory to query; usually the output of an RNN encoder. 即解码时用到的上文信息，维度需要是 [batch_size, max_time, context_dim]
+  """
+  ```
+
+  > AttentionWrapper   
+
+  wrapper都是RNNCell的实例，该类可以加入attention机制
+
+  ```python
+  """
+  def __init__(self,
+      cell,
+      attention_mechanism,
+      attention_layer_size=None,
+      alignment_history=False,
+      cell_input_fn=None,
+      output_attention=True,
+      initial_cell_state=None,
+      name=None):
+  """
+  # Attention
+  attention_cell = AttentionWrapper(
+      GRUCell(hp.attention_depth),
+      BahdanauAttention(hp.attention_depth, encoder_outputs),
+      alignment_history=True,
+      output_attention=False)  # [N, T_in, attention_depth=256]
+  """
+  cell：An instance of RNNCell. RNNCell 的实例，这里可以是单个的 RNNCell，也可以是多个 RNNCell 组成的 MultiRNNCell。
+  attention_mechanism：即 AttentionMechanism 的实例，如 BahdanauAttention 对象，另外可以是多个 AttentionMechanism 组成的列表。
+  attention_layer_size：是数字或者数字做成的列表，如果是 None（默认），直接使用加权计算后得到的 Attention 作为输出，如果不是 None，那么 Attention 结果还会和 Output 进行拼接并做线性变换再输出。
+  """
+  ```
