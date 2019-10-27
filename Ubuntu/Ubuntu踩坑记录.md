@@ -12,7 +12,9 @@
 ./rjsupplicant.sh -u account -p password -d 1
 ```
 
+pip freeze>request.txt
 
+pip install -r request.txt
 
 ##### sh新建文档后会发现右上角的网络图标没了 https://blog.csdn.net/carl_qi/article/details/50769282
 
