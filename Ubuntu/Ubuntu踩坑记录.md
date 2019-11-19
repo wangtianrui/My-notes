@@ -16,6 +16,10 @@ pip freeze>request.txt
 
 pip install -r request.txt
 
+mysql wTr135410
+
+/etc/init.d/nginx start
+
 ##### sh新建文档后会发现右上角的网络图标没了 https://blog.csdn.net/carl_qi/article/details/50769282
 
 ```txt

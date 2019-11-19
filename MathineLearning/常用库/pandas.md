@@ -86,6 +86,11 @@ top_oceania_wines = reviews.loc[
 
 # 直接获取某列值
 y_train = train.SalePrice.values
+
+# 遍历行
+for index, row in datas.iterrows():
+    row = np.array(row)
+    
 ```
 
 ##### 根据条件分组
