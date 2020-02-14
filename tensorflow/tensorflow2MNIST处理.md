@@ -1,4 +1,4 @@
-# tensorflow学习第二天
+# tensorflow学习
 
 ## MNIST数据集处理(单纯使用线性规划来进行图像识别)
 

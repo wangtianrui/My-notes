@@ -1,4 +1,7 @@
 ```txt
+git rm -r --cached voice_analysis/mel_data
+
+
 
 //将当前文件夹改编成仓库
   git init
