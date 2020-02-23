@@ -16,17 +16,17 @@
 
   下图是其中具有代表性的10个网络，及其相应的分析
 
-  ![](https://s2.ax1x.com/2020/02/23/3lDWNt.png)
+  ![](http://39.96.162.42/get_audio_src?filename=cnn.png)
 
 * ### 对CNN12模型结果进行了可视化分析
 
   各维度平均误差
 
-  ![](https://s2.ax1x.com/2020/02/23/3lTMqI.png)
+  ![](http://39.96.162.42/get_audio_src?filename=bar.png)
 
   各维度误差分布
 
-  ![](https://s2.ax1x.com/2020/02/23/3lTmxH.png)
+  ![](http://39.96.162.42/get_audio_src?filename=all_bar.png)
 
   整体来讲效果还能接受。我将数据里分布明显不均衡的五个维度["停顿次数", "滑稽", "戏谑", "神圣", "木楞"]，去掉后，平均误差值为0.94左右。
 
