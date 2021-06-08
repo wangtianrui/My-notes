@@ -39,10 +39,21 @@ https://pypi.mirrors.ustc.edu.cn/simple/
 http://pypi.hustunique.com/
 tensorflow   
 
+
+
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn numpy
 
 原地址：https://github.com/xxx.git
 替换为：https://github.com.cnpmjs.org/xxx.git
+
+使用方式用实际的名称替换{}的内容，即可加速clone
+https://hub.fastgit.org/{username}/{reponame}.git
+clone 出来的 remote "origin" 为fastgit的地址，需要手动改回来
+你也可以直接使用他们的clone加速工具 fgit-go
+
+github.com的镜像网站(注意：不能登录)
+hub.fastgit.org
+github.com.cnpmjs.org 这个很容易超限
  
 git clone https://github.com.cnpmjs.org/xxx.git
 
@@ -107,8 +118,6 @@ sudo dpkg -i 文件名
 sudo mv 目标文件 目标目录  
 ```
 
-![](https://images2015.cnblogs.com/blog/16576/201607/16576-20160710222051796-1907038675.png)
-
 ##### 删除文件
 
 ```txt
@@ -155,17 +164,13 @@ https://blog.csdn.net/wh8514/article/details/81532286
 
 
 
-
-
-![](https://s2.ax1x.com/2019/03/21/A1dnw4.png)
-
 注意有个点
 
 
 
 sudo apt-get update
 
-sudo apt-get upgrade
+sudo apt-get upgrad
 sudo apt-get install lightdm
 
 ### .tar 文件
@@ -211,3 +216,102 @@ rar x FileName.rar      # 解压
 rar a FileName.rar DirName # 压缩
 ```
 
+### git
+
+```cmd
+git config --global http.proxy 127.0.0.1:1080
+git config --global https.proxy 127.0.0.1:1080
+
+vim ~/.gitconfig
+
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+curl 'http://10.10.43.3' --data "DDDDD=20120318&upass=015511&0MKKey="
+
+export GIT_SSL_NO_VERIFY=1
+
+  git config --global user.email "1056992492@qq.com"
+  git config --global user.name "ScorpioMiku"
+```
+
+# awk
+
+```
+awk` `'{pattern + action}'` `{filenames}
+```
+
+![](https://images2015.cnblogs.com/blog/1089507/201701/1089507-20170126222420597-662074402.jpg)
+
+```
+实例一：统计/etc/passwd的账户人数
+[root@Gin scripts]``# awk 'BEGIN {count=0;print "[start] user count is ",count} {count=count+1;print $0} END{print "[end] user count is ",count}' passwd
+[start] user count is 0
+root:x:0:0:root:``/root``:``/bin/bash
+...................................................................
+[end] user count is 27
+```
+
+```
+实例二：统计某个文件夹下的文件占用的字节数
+[root@Gin scripts]``# ll |awk 'BEGIN {size=0;} {size=size+$5;} END{print "[end]size is ",size}'
+[end]size is 1489
+```
+
+```
+[root@Gin scripts]``# awk 'BEGIN{a=5;a+=5;print a}'
+10
+```
+
+```
+[root@Gin scripts]``# awk 'BEGIN{a=1;b=2;print (a>2&&b>1,a=1||b>1)}'
+0 1
+```
+
+```
+正则
+[root@Gin scripts]``# awk 'BEGIN{a="100testaa";if(a~/100/) {print "ok"}}'
+ok
+```
+
+```
+FS="\t" 一个或多个 Tab 分隔 （FS可以自己定义）
+[root@Gin scripts]``# cat tab.txt
+ww  CC    IDD
+[root@Gin scripts]``# awk 'BEGIN{FS="\t+"}{print $1,$2,$3}' tab.txt
+ww  CC    IDD
+```
+
+```
+FS="[[:space:]+]" 一个或多个空白空格，默认的
+[root@Gin scripts]``# cat space.txt
+we are  studing ``awk` `now!
+[root@Gin scripts]``# awk -F [[:space:]+] '{print $1,$2,$3,$4,$5}' space.txt
+we are 
+[root@Gin scripts]``# awk -F [[:space:]+] '{print $1,$2}' space.txt
+we are
+```
+
+```
+FS="[" ":]+" 以一个或多个空格或：分隔
+[root@Gin scripts]``# cat hello.txt
+root:x:0:0:root:``/root``:``/bin/bash
+[root@Gin scripts]``# awk -F [" ":]+ '{print $1,$2,$3}' hello.txt
+root x 0
+```
+
+```
+字段数量 NF
+[root@Gin scripts]``# cat hello.txt
+root:x:0:0:root:``/root``:``/bin/bash
+bin:x:1:1:bin:``/bin``:``/sbin/nologin``:888
+[root@Gin scripts]``# awk -F ":" 'NF==8{print $0}' hello.txt
+bin:x:1:1:bin:``/bin``:``/sbin/nologin``:888
+```
+
+```
+记录数量 NR
+[root@Gin scripts]``# ifconfig eth0|awk -F [" ":]+ 'NR==2{print $4}' ## NR==2也就是取第2行
+192.168.17.129
+```
+
+#### while(<>) 打开文件的所有行
